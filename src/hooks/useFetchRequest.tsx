@@ -1,5 +1,4 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios"
-import { useState } from "react"
 import useApi from "./useApi"
 
 
@@ -13,8 +12,7 @@ export type UseFetchRequest<T, D> =  UseFetchRequestResponse<T, D>
 
 const useFetchRequest = <T extends any, D = any>({url, config = {}}: useFetchRequestParams<D>): UseFetchRequest<T, D> => {
   const {get} = useApi()
-  const [isLoading, setIsLoading] = useState(true)
-  const responseFromHttpRequest = get<T, AxiosResponse<T, D>, D>(url, config).finally(() => setIsLoading(false))
+  const responseFromHttpRequest = get<T, AxiosResponse<T, D>, D>(url, config)
 
   return responseFromHttpRequest
 }
