@@ -1,34 +1,34 @@
-import { useCallback, useEffect, useState } from "react"
-import useFetchRequest from "./useFetchRequest"
+import { useCallback, useEffect, useState } from 'react';
+import useFetchRequest from './useFetchRequest';
 
 export type PokemonDetailsSprites = {
   other: {
     home: {
-      front_default: string
-    }
-  }
-}
+      front_default: string;
+    };
+  };
+};
 
 export type PokemonDetailsData = {
   name: string;
-  sprites: PokemonDetailsSprites
-}
+  sprites: PokemonDetailsSprites;
+};
 
 const useFetchPokemonsDetails = (url: string) => {
-  const responseFromHttpRequest = useFetchRequest<PokemonDetailsData>({url: '', config: {baseURL: url}})
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetailsData>()
+  const responseFromHttpRequest = useFetchRequest<PokemonDetailsData>({ url: '', config: { baseURL: url } });
+  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetailsData>();
 
   const populateStateWithResponse = useCallback(async () => {
-    const {data: dataFromRequest} = await responseFromHttpRequest
+    const { data: dataFromRequest } = await responseFromHttpRequest;
 
-    setPokemonDetails(dataFromRequest)
-  }, [url])
+    setPokemonDetails(dataFromRequest);
+  }, [url]);
 
   useEffect(() => {
-    populateStateWithResponse()
-  }, [populateStateWithResponse])
+    populateStateWithResponse();
+  }, [populateStateWithResponse]);
 
-  return pokemonDetails
-}
+  return pokemonDetails;
+};
 
-export default useFetchPokemonsDetails
+export default useFetchPokemonsDetails;
